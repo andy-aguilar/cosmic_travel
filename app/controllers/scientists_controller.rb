@@ -13,16 +13,25 @@ class ScientistsController < ApplicationController
     end
 
     def create
+        @scientist = Scientist.new(scientist_params)
+        if @scientist.save
+            redirect_to scientist_path(@scientist)
+        else
+            render :new
+        end
     end
 
     def edit
     end
 
     def update
-
+        @scientist.update(scientist_params)
+        redirect_to scientist_path(@scientist)
     end
 
     def destroy
+        @scientist.destroy
+        redirect_to scientists_path
     end
 
     private
@@ -30,7 +39,7 @@ class ScientistsController < ApplicationController
         @scientist = Scientist.find(params[:id])
     end
 
-    # def scientist_params
-    #     params.require(:scientist).permit(##otherstuff)
-    # end
+    def scientist_params
+        params.require(:scientist).permit(:name, :field_of_study)
+    end
 end

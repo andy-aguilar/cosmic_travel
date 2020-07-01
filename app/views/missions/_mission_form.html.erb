@@ -1,0 +1,7 @@
+<%= form_for @mission do |f| %>
+<%= f.label :scientist, "Who would you like to send on this mission?" %>
+<%= f.collection_select :scientist_id, Scientist.all, :id, :name %>
+<%= f.label :planet, "To which far away planet would you like to send them?"%>
+<%= f.collection_select :planet_id, Planet.all, :id, :name %>
+<%= f.submit %>
+<% end %>
